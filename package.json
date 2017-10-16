@@ -1,0 +1,38 @@
+{
+  "name": "fuse-box-https-server",
+  "version": "0.0.1",
+  "description": "HTTPS Server for FuseBox.",
+  "main": "./dist/index.js",
+  "repository": "git@github.com:yutahaga/fuse-box-https-server.git",
+  "author": "Yuta Haga <yutahaga7@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc && ncp ./keys ./dist/keys",
+    "lint": "eslint \"src/**/*.ts\"",
+    "format": "prettier-eslint --write \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "app-root-path": "^2.0.1",
+    "express": "^4.16.2",
+    "fs-extra": "^4.0.2",
+    "fuse-box": "^2.3.3",
+    "http-proxy-middleware": "^0.17.4",
+    "realm-utils": "^1.0.8",
+    "ws": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.37",
+    "@types/node": "^8.0.34",
+    "eslint": "^4.9.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "ncp": "^2.0.0",
+    "prettier-eslint-cli": "^4.4.0",
+    "ts-loader": "^2.3.7",
+    "typescript": "^2.5.3",
+    "typescript-eslint-parser": "^8.0.0"
+  }
+}
