@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
-const https = require("https");
+const spdy = require("spdy");
 const express = require("express");
 const SocketServer_1 = require("./SocketServer");
 const Utils_1 = require("./Utils");
@@ -22,7 +22,10 @@ class HTTPSServer {
         const key = fs.readFileSync(this.opts.key || '../keys/dev.localhost.key');
         const cert = fs.readFileSync(this.opts.cert || '../keys/dev.localhost.cert');
         const backlog = this.opts.backlog || 511;
-        let server = https.createServer({ key, cert });
+        const ssl = {
+            ssl: { key, cert }
+        };
+        let server = spdy.createServer({ key, cert }, this.app);
         SocketServer_1.SocketServer.createInstance(server, this.fuse);
         this.setup();
         if (userSettings && userSettings.proxy) {
@@ -33,14 +36,14 @@ class HTTPSServer {
             catch (e) { }
             if (proxyInstance) {
                 for (let uPath in userSettings.proxy) {
-                    this.app.use(uPath, proxyInstance(userSettings.proxy[uPath]));
+                    const proxyOpts = Object.assign({}, userSettings.proxy[uPath], ssl);
+                    this.app.use(uPath, proxyInstance(proxyOpts));
                 }
             }
             else {
                 this.fuse.context.log.echoWarning('You are using development proxy but "http-proxy-middleware" was not installed');
             }
         }
-        server.on('request', this.app);
         setTimeout(() => {
             const packageInfo = Utils_1.getFuseBoxInfo();
             server.listen(port, host, backlog, () => {

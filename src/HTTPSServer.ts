@@ -1,5 +1,5 @@
 import * as fs from 'fs'
-import * as https from 'https'
+import * as spdy from 'spdy'
 import * as express from 'express'
 import { FuseBox } from 'fuse-box'
 import { SocketServer } from './SocketServer'
@@ -44,7 +44,10 @@ export class HTTPSServer {
     const key = fs.readFileSync(this.opts.key || '../keys/dev.localhost.key')
     const cert = fs.readFileSync(this.opts.cert || '../keys/dev.localhost.cert')
     const backlog = this.opts.backlog || 511
-    let server = https.createServer({ key, cert })
+    const ssl = {
+      ssl: { key, cert }
+    }
+    let server = spdy.createServer({ key, cert }, this.app)
     SocketServer.createInstance(server, this.fuse)
     this.setup()
 
@@ -55,7 +58,8 @@ export class HTTPSServer {
       } catch (e) {}
       if (proxyInstance) {
         for (let uPath in userSettings.proxy) {
-          this.app.use(uPath, proxyInstance(userSettings.proxy[uPath]))
+          const proxyOpts = Object.assign({}, userSettings.proxy[uPath], ssl)
+          this.app.use(uPath, proxyInstance(proxyOpts))
         }
       } else {
         this.fuse.context.log.echoWarning(
@@ -64,7 +68,6 @@ export class HTTPSServer {
       }
     }
 
-    server.on('request', this.app)
     setTimeout(() => {
       const packageInfo = getFuseBoxInfo()
       server.listen(port, host, backlog, () => {
