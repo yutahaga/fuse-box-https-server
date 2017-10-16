@@ -6,7 +6,7 @@ export declare class SocketServer {
     static createInstance(server: any, fuse: FuseBox): SocketServer;
     static getInstance(): SocketServer;
     static start(server: any, fuse: FuseBox): SocketServer;
-    static startSocketServer(port: number, fuse: FuseBox): SocketServer;
+    static startSocketServer(host: string, port: number, fuse: FuseBox): SocketServer;
     cursor: any;
     clients: Set<any>;
     constructor(server: any, fuse: FuseBox);

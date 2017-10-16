@@ -23,8 +23,8 @@ export class SocketServer {
     return ss
   }
 
-  public static startSocketServer (port: number, fuse: FuseBox) {
-    let wss = new Server({ port })
+  public static startSocketServer (host: string, port: number, fuse: FuseBox) {
+    let wss = new Server({ host, port })
     this.server = new SocketServer(wss, fuse)
     fuse.context.log.echo(`Launching socket server on ${port}`)
 

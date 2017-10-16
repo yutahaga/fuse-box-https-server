@@ -99,7 +99,7 @@ export class Server {
 
     process.nextTick(() => {
       if (opts.httpsServer === false) {
-        SocketServer.startSocketServer(port, this.fuse)
+        SocketServer.startSocketServer(host, port, this.fuse)
       } else {
         this.httpsServer.launch(
           {

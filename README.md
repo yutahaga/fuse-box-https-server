@@ -40,6 +40,8 @@ serve(
       }
     }
   },
-  callback(server => {})
+  server => {
+    fuse.bundle('app').hmr()
+  }
 )
 ```

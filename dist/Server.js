@@ -41,7 +41,7 @@ class Server {
         this.httpsServer = new HTTPSServer_1.HTTPSServer(this.fuse);
         process.nextTick(() => {
             if (opts.httpsServer === false) {
-                SocketServer_1.SocketServer.startSocketServer(port, this.fuse);
+                SocketServer_1.SocketServer.startSocketServer(host, port, this.fuse);
             }
             else {
                 this.httpsServer.launch({

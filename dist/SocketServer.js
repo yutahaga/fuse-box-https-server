@@ -36,8 +36,8 @@ class SocketServer {
         let ss = new SocketServer(wss, fuse);
         return ss;
     }
-    static startSocketServer(port, fuse) {
-        let wss = new ws_1.Server({ port });
+    static startSocketServer(host, port, fuse) {
+        let wss = new ws_1.Server({ host, port });
         this.server = new SocketServer(wss, fuse);
         fuse.context.log.echo(`Launching socket server on ${port}`);
         return this.server;
