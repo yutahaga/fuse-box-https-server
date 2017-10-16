@@ -19,8 +19,8 @@ class HTTPSServer {
         this.opts = opts || {};
         const port = this.opts.port || 4444;
         const host = this.opts.host || 'dev.localhost';
-        const key = fs.readFileSync(this.opts.key || './keys/dev.localhost.key');
-        const cert = fs.readFileSync(this.opts.cert || './keys/dev.localhost.cert');
+        const key = fs.readFileSync(this.opts.key || '../keys/dev.localhost.key');
+        const cert = fs.readFileSync(this.opts.cert || '../keys/dev.localhost.cert');
         const backlog = this.opts.backlog || 511;
         let server = https.createServer({ key, cert });
         SocketServer_1.SocketServer.createInstance(server, this.fuse);

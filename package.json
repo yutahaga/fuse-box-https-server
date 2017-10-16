@@ -9,7 +9,8 @@
   "scripts": {
     "build": "tsc && ncp ./keys ./dist/keys",
     "lint": "eslint \"src/**/*.ts\"",
-    "format": "prettier-eslint --write \"src/**/*.ts\""
+    "format": "prettier-eslint --write \"src/**/*.ts\"",
+    "clean": "rimraf ./dist"
   },
   "dependencies": {
     "app-root-path": "^2.0.1",
@@ -31,6 +32,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "ncp": "^2.0.0",
     "prettier-eslint-cli": "^4.4.0",
+    "rimraf": "^2.6.2",
     "ts-loader": "^2.3.7",
     "typescript": "^2.5.3",
     "typescript-eslint-parser": "^8.0.0"
