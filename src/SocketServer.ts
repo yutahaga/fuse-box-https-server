@@ -3,6 +3,7 @@ import { Server } from 'ws'
 
 export class SocketServer {
   public static server: SocketServer
+  public static entity: Server
 
   public static createInstance (server: any, fuse: FuseBox) {
     if (!this.server) {
@@ -20,12 +21,15 @@ export class SocketServer {
     let wss = new Server({ server })
     let ss = new SocketServer(wss, fuse)
 
+    this.entity = wss
+
     return ss
   }
 
   public static startSocketServer (host: string, port: number, fuse: FuseBox) {
     let wss = new Server({ host, port })
     this.server = new SocketServer(wss, fuse)
+    this.entity = wss
     fuse.context.log.echo(`Launching socket server on ${port}`)
 
     return this.server

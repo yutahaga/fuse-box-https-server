@@ -31,6 +31,7 @@ export class HTTPSServer {
 
   public app: any
   public opts: HTTPSServerOptions
+  public entity: spdy.server.Server
 
   constructor (private fuse: FuseBox) {
     this.app = express()
@@ -48,6 +49,7 @@ export class HTTPSServer {
       ssl: { key, cert }
     }
     let server = spdy.createServer({ key, cert }, this.app)
+    this.entity = server
     SocketServer.createInstance(server, this.fuse)
     this.setup()
 

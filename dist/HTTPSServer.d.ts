@@ -1,3 +1,4 @@
+import * as spdy from 'spdy';
 import { FuseBox } from 'fuse-box';
 import { ServerOptions } from './Server';
 export interface HTTPSServerOptions {
@@ -13,6 +14,7 @@ export declare class HTTPSServer {
     static start(opts: any, fuse: FuseBox): HTTPSServer;
     app: any;
     opts: HTTPSServerOptions;
+    entity: spdy.server.Server;
     constructor(fuse: FuseBox);
     launch(opts: HTTPSServerOptions, userSettings?: ServerOptions): void;
     private setup();

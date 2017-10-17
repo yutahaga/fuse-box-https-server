@@ -26,6 +26,7 @@ class HTTPSServer {
             ssl: { key, cert }
         };
         let server = spdy.createServer({ key, cert }, this.app);
+        this.entity = server;
         SocketServer_1.SocketServer.createInstance(server, this.fuse);
         this.setup();
         if (userSettings && userSettings.proxy) {

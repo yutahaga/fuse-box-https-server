@@ -1,8 +1,10 @@
 import { FuseBox } from 'fuse-box';
+import { Server } from 'ws';
 export declare class SocketServer {
     server: any;
     fuse: FuseBox;
     static server: SocketServer;
+    static entity: Server;
     static createInstance(server: any, fuse: FuseBox): SocketServer;
     static getInstance(): SocketServer;
     static start(server: any, fuse: FuseBox): SocketServer;

@@ -34,11 +34,13 @@ class SocketServer {
     static start(server, fuse) {
         let wss = new ws_1.Server({ server });
         let ss = new SocketServer(wss, fuse);
+        this.entity = wss;
         return ss;
     }
     static startSocketServer(host, port, fuse) {
         let wss = new ws_1.Server({ host, port });
         this.server = new SocketServer(wss, fuse);
+        this.entity = wss;
         fuse.context.log.echo(`Launching socket server on ${port}`);
         return this.server;
     }
