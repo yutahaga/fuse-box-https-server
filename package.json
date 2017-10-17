@@ -34,7 +34,6 @@
     "ncp": "^2.0.0",
     "prettier-eslint-cli": "^4.4.0",
     "rimraf": "^2.6.2",
-    "ts-loader": "^2.3.7",
     "typescript": "^2.5.3",
     "typescript-eslint-parser": "^8.0.0"
   }
