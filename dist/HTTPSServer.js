@@ -47,7 +47,7 @@ class HTTPSServer {
         }
         setTimeout(() => {
             const packageInfo = Utils_1.getFuseBoxInfo();
-            server.listen(port, host, backlog, () => {
+            server.listen(port, '0.0.0.0', backlog, () => {
                 const msg = `
 -----------------------------------------------------------------
 Development server running https://${host}:${port} @ ${packageInfo.version}
